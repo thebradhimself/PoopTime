@@ -32,7 +32,7 @@ class Pooptime extends React.Component{
 
     timerStop(){
       clearInterval(this.timer);
-      this.setState({timer: false});
+      this.setState({timer: false, last_money: this.state.money_earned, last_time: this.state.elapsed});
     }
 
     setWage(event){
@@ -55,22 +55,30 @@ class Pooptime extends React.Component{
 
         return(<div>
                  <div className='row'>
-                  <div className='card-panel col m2'>
-                    <p>
-                      What is your Hourly Wage?
-                      <div className='row'>
-                        <input className="hourlyWage col m6" onKeyUp={this.setWage} />
-                        <br />
-                        <div className='right-align'>
-                          {button}
-                        </div>
+                  <div className='card-panel col m2 tall140'>
+                    What is your Hourly Wage?
+                    <div className='row'>
+                      <input className="hourlyWage col m6" onKeyUp={this.setWage} />
+                      <br />
+                      <div className='right-align'>
+                        {button}
                       </div>
-                    </p>
+                    </div>
+                  </div>
+                  <div className='card-panel col m2 tall140'>
+                    Time Wasted: <b>{seconds} seconds</b>.
+                  </div>
+                  <div className='card-panel col m2 tall140'>
+                    Money Earned: <b>${this.state.money_earned}</b>
                   </div>
                  </div>
                  <div className='row'>
-                  <p>Time Wasted: <b>{seconds} seconds</b>.</p>
-                  <p>Money Earned: <b>${this.state.money_earned}</b></p>
+                  <div className='col m6'>
+                    <hr />
+                    <h3>Last Use</h3>
+                    <h6>Money Made: {this.state.last_money}</h6>
+                    <h6>Time Wasted: {this.state.last_time} </h6>
+                  </div>
                  </div>
                </div>
              );
