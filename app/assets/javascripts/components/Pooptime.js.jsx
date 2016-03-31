@@ -56,9 +56,8 @@ class Pooptime extends React.Component{
         return(<div>
                  <div className='row'>
                   <div className='col m2'>
-                    What is your Hourly Wage?
                     <div className='row'>
-                      <input className="hourlyWage col m6" onKeyUp={this.setWage} />
+                      <input className="hourlyWage col m6" placeholder="Hourly Wage" onKeyUp={this.setWage} />
                       <br />
                       <div className='right-align'>
                         {button}
