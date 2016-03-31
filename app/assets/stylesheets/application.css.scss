@@ -3,3 +3,7 @@
 .tall140 {
   height: 140px;
 }
+
+body {
+  @extend .brown;
+}

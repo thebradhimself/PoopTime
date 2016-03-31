@@ -55,7 +55,7 @@ class Pooptime extends React.Component{
 
         return(<div>
                  <div className='row'>
-                  <div className='card-panel col m2 tall140'>
+                  <div className='col m2'>
                     What is your Hourly Wage?
                     <div className='row'>
                       <input className="hourlyWage col m6" onKeyUp={this.setWage} />
@@ -65,10 +65,10 @@ class Pooptime extends React.Component{
                       </div>
                     </div>
                   </div>
-                  <div className='card-panel col m2 tall140'>
+                  <div className='col m2'>
                     Time Wasted: <b>{seconds} seconds</b>.
                   </div>
-                  <div className='card-panel col m2 tall140'>
+                  <div className='col m2'>
                     Money Earned: <b>${this.state.money_earned}</b>
                   </div>
                  </div>
