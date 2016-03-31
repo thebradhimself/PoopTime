@@ -45,26 +45,35 @@ class Pooptime extends React.Component{
 
         // This will give a number with one digit after the decimal dot (xx.x):
         let seconds = (elapsed / 10).toFixed(1);
-        let button = (<button onClick={this.timerStart}>Start</button>);
+        let button = (<button onClick={this.timerStart}>Start Timer</button>);
         if(this.state.timer){
-          button = (<button onClick={this.timerStop}>Stop</button>);
+          button = (<button onClick={this.timerStop}>Stop Timer</button>);
         }
 
         // Although we return an entire <p> element, react will smartly update
         // only the changed parts, which contain the seconds variable.
 
         return(<div>
-                <p>
-                  What is your Hourly Wage?
-                  <div className='row'>
-                    <div className='col s4'>
-                      <input className="hourlyWage col s2" onKeyUp={this.setWage} />
-                    </div>
+                 <div className='row'>
+                  <div className='card-panel col m2'>
+                    <p>
+                      What is your Hourly Wage?
+                      <div className='row'>
+                        <input className="hourlyWage col m6" onKeyUp={this.setWage} />
+                        <br />
+                        <div className='right-align'>
+                          {button}
+                        </div>
+                      </div>
+                    </p>
                   </div>
-                </p>
-                <p>This example was started <b>{seconds} seconds</b> ago.</p>
-                <p>${this.state.money_earned}</p>
-                {button}
-               </div>);
+                 </div>
+                 <div className='row'>
+                  <p>Time Wasted: <b>{seconds} seconds</b>.</p>
+                  <p>Money Earned: <b>${this.state.money_earned}</b></p>
+                 </div>
+               </div>
+             );
+
     }
 }
