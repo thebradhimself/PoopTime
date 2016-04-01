@@ -9,6 +9,20 @@ class Pooptime extends React.Component{
       this.setWage = this.setWage.bind(this);
     }
 
+    componentWillMount(){
+      $.ajax({
+        url: '/grab_totals',
+        type: 'GET',
+        dataType: 'JSON'
+      }).success(data => {
+        console.log(data);
+        this.setState({total_time: data.total_time, total_money: data.total_money})
+      }).fail(data =>{
+        console.log(data);
+      });
+    }
+
+
     componentWillUnmount(){
 
         // This method is called immediately before the component is removed
@@ -79,6 +93,14 @@ class Pooptime extends React.Component{
                     <h6>Time Wasted: {this.state.last_time} </h6>
                   </div>
                  </div>
+                 <div className='row'>
+                 <div className='col m6'>
+                   <hr />
+                   <h3>Worldwide Totals</h3>
+                   <h6>Total Money Made: {this.state.total_money}</h6>
+                   <h6>Total Time Wasted: {this.state.total_time} </h6>
+                 </div>
+               </div>
                </div>
              );
 
