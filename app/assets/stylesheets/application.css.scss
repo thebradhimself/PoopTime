@@ -1,9 +1,47 @@
 @import "materialize";
 
+@font-face {
+  font-family: 'chawp';
+  src: url(font-path('chawp.eot'));
+  src: url(font-path('chawp.eot?#iefix')) format('embedded-opentype'),
+         url(font-path('chawp.woff')) format('woff'),
+         url(font-path('chawp.ttf')) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .tall140 {
   height: 140px;
 }
 
 body {
   @extend .brown;
+}
+
+.pooper{
+  height: 200px;
+  width: 350px;
+  background-color: brown;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ss_button{
+  background-color: #333333;
+  border-radius: 20px;
+  height: 85px;
+  width: 85px;
+  margin: 20px;
+  font-size: 20px;
+}
+
+.time_money_div{
+  background-color: #333333;
+  color: white;
+  opacity: 25%;
+  font-family: 'chawp';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 35px;
+  margin-top: 10px;
+  border-radius: 20px;
 }

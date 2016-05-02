@@ -2,11 +2,13 @@ class Pooptime extends React.Component{
 
     constructor(props){
       super(props);
-      this.state = {elapsed: 0, wage: 0, money_earned: 0, timer: false};
+      this.state = ({timer: false, seconds: 0, minutes: 0, hour: 0})
       this.tick = this.tick.bind(this);
       this.timerStart = this.timerStart.bind(this);
       this.timerStop = this.timerStop.bind(this);
       this.setWage = this.setWage.bind(this);
+      this.getTimeCount = this.getTimeCount.bind(this);
+      this.getMoney = this.getMoney.bind(this);
     }
 
     componentWillMount(){
@@ -36,7 +38,7 @@ class Pooptime extends React.Component{
         // This function is called every 50 ms. It updates the
         // elapsed counter. Calling setState causes the component to be re-rendered
         this.setState({elapsed: Date.now() - this.state.start, money_earned: (((Number.parseFloat(this.state.wage) / 3600) * this.state.elapsed) / 1000).toFixed(2)});
-
+        this.getTimeCount();
     }
 
     timerStart(){
@@ -53,54 +55,55 @@ class Pooptime extends React.Component{
       this.setState({wage: event.target.value});
     }
 
+    getTimeCount(){
+      let elapsed = Math.round(this.state.elapsed / 100);
+      let seconds = (elapsed / 10).toFixed(1);
+      let seconds1 = Math.floor(seconds % 60);
+      let minutes = Math.floor(seconds / 60);
+      let minutes1 = Math.floor(seconds % 60);
+      let hours = Math.floor(minutes / 60);
+      this.setState({seconds: seconds1, minutes: minutes, hours: hours});
+    }
+
+    getMoney(){
+
+    }
+
     render() {
 
-        let elapsed = Math.round(this.state.elapsed / 100);
+        // let elapsed = Math.round(this.state.elapsed / 100);
 
         // This will give a number with one digit after the decimal dot (xx.x):
-        let seconds = (elapsed / 10).toFixed(1);
-        let button = (<button onClick={this.timerStart}>Start Timer</button>);
+        // let seconds = (elapsed / 10).toFixed(1);
+        let button = (<button className="btn col s3 ss_button" onClick={this.timerStart}>Start</button>);
+        let time = "0h 0m 0s";
+        let money = "$0.00";
         if(this.state.timer){
-          button = (<button onClick={this.timerStop}>Stop Timer</button>);
+          button = (<button className="btn col s3 ss_button" onClick={this.timerStop}>Stop</button>);
+          time = `${this.state.hour}h ${this.state.minutes}m ${this.state.seconds}s`
+          money = `$${this.state.money_earned}`
         }
 
         // Although we return an entire <p> element, react will smartly update
         // only the changed parts, which contain the seconds variable.
 
-        return(<div>
-                 <div className='row'>
-                  <div className='col m2'>
+        return(<div className='row'>
+                 <div className='col s12 m3'>
+                 test
+                 </div>
+                 <div className='col s12 offset-m1 m4 pooper'>
+                    {button}
+                    <div className='time_money_div col s8'>
+                      <div className=''>{money}</div>
+                      <div className=''>{time}</div>
+                    </div>
                     <div className='row'>
                       <input className="hourlyWage col m6" placeholder="Hourly Wage" onKeyUp={this.setWage} />
                       <br />
-                      <div className='right-align'>
-                        {button}
-                      </div>
                     </div>
-                  </div>
-                  <div className='col m2'>
-                    Time Wasted: <b>{seconds} seconds</b>.
-                  </div>
-                  <div className='col m2'>
-                    Money Earned: <b>${this.state.money_earned}</b>
-                  </div>
                  </div>
-                 <div className='row'>
-                  <div className='col m6'>
-                    <hr />
-                    <h3>Last Use</h3>
-                    <h6>Money Made: {this.state.last_money}</h6>
-                    <h6>Time Wasted: {this.state.last_time} </h6>
-                  </div>
+                 <div className='col s12 offset-m1 m3'>
                  </div>
-                 <div className='row'>
-                 <div className='col m6'>
-                   <hr />
-                   <h3>Worldwide Totals</h3>
-                   <h6>Total Money Made: {this.state.total_money}</h6>
-                   <h6>Total Time Wasted: {this.state.total_time} </h6>
-                 </div>
-               </div>
                </div>
              );
 
