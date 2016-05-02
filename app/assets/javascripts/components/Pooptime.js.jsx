@@ -60,9 +60,10 @@ class Pooptime extends React.Component{
       let seconds = (elapsed / 10).toFixed(1);
       let seconds1 = Math.floor(seconds % 60);
       let minutes = Math.floor(seconds / 60);
-      let minutes1 = Math.floor(seconds % 60);
+      let minutes1 = Math.floor(minutes % 60);
       let hours = Math.floor(minutes / 60);
-      this.setState({seconds: seconds1, minutes: minutes, hours: hours});
+      let hours1 = Math.floor(hours % 60);
+      this.setState({seconds: seconds1, minutes: minutes1, hour: hours1});
     }
 
     getMoney(){
