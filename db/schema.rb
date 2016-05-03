@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331215104) do
+ActiveRecord::Schema.define(version: 20160503003114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "poopeds", force: :cascade do |t|
+    t.float    "money_earned"
+    t.float    "time_wasted"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.float    "wage"
+  end
 
   create_table "total_poops", force: :cascade do |t|
     t.decimal  "total_money"

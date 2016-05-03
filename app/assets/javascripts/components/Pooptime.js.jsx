@@ -9,6 +9,7 @@ class Pooptime extends React.Component{
       this.setWage = this.setWage.bind(this);
       this.getTimeCount = this.getTimeCount.bind(this);
       this.format_time = this.format_time.bind(this);
+      this.savePoop = this.savePoop.bind(this);
     }
 
     componentWillMount(){
@@ -24,17 +25,27 @@ class Pooptime extends React.Component{
       });
     }
 
+    savePoop(money, time){
+      $.ajax({
+        url: '/save_poop',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {pooped: {money_earned: money, time_wasted: time, user_id: this.props.current_user.id, wage: this.state.wage}}
+      }).success(data => {
+        console.log(data);
+      }).fail(data =>{
+        console.log(data);
+      });
+    }
+
 
     componentWillUnmount(){
-
         // This method is called immediately before the component is removed
         // from the page and destroyed. We can clear the interval here:
-
         clearInterval(this.timer);
     }
 
     tick(){
-
         // This function is called every 50 ms. It updates the
         // elapsed counter. Calling setState causes the component to be re-rendered
         this.setState({elapsed: Date.now() - this.state.start, money_earned: (((Number.parseFloat(this.state.wage) / 3600) * this.state.elapsed) / 1000).toFixed(2)});
@@ -52,6 +63,8 @@ class Pooptime extends React.Component{
     timerStop(){
       this.setState({timer: false, last_money: this.state.money_earned, last_time: this.state.elapsed});
       clearInterval(this.timer);
+      if(this.props.current_user)
+        this.savePoop(this.state.money_earned, this.state.elapsed);
     }
 
     setWage(event){
@@ -97,12 +110,12 @@ class Pooptime extends React.Component{
         // only the changed parts, which contain the seconds variable.
 
         return(<div className='row'>
-                 <div className='col s12 m3'>
+                 <div className='row col s12 m3'>
                  test
                  </div>
-                 <div className='col s12 offset-m1 m4 pooper'>
+                 <div className='row col s12 offset-m1 m4 pooper'>
                     {button}
-                    <div className='time_money_div col s8'>
+                    <div className='row time_money_div col s8'>
                       <div className=''>{money}</div>
                       <div className=''>{time}</div>
                     </div>
