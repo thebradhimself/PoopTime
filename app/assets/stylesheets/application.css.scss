@@ -18,11 +18,23 @@ body {
   @extend .brown;
 }
 
+.chawp_font{
+  font-family: 'chawp';
+}
+
+.underline{
+  text-decoration: underline;
+}
+
 .pooper{
-  height: 200px;
-  width: 350px;
-  background-color: brown;
+  height: 250px;
+  min-width: 350px;
+  background-color: #914800;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.font35{
+  font-size: 35px;
 }
 
 .ss_button{
